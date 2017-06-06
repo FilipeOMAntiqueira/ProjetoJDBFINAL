@@ -1,5 +1,7 @@
 package br.com.fiap.model;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +14,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="CIDADE")
-public class Cidade {
+public class Cidade implements Serializable{
+	/**
+	 * Classe responsável pela tabela CIDADE
+	 * @author filipemoraes
+	 */
+	private static final long serialVersionUID = -8053132526435821974L;
+
 	@Id
 	@Column(name="CODIGO", nullable=false, unique=true)
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -53,8 +61,19 @@ public class Cidade {
 	public String toString() {
 		return "Cidade [id=" + id + ", nome=" + nome + ", estado=" + estado.getCodigo() + "]";
 	}
-	
 
+	public Cidade(int id, String nome, Estado estado) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.estado = estado;
+	}
+
+	public Cidade() {
+		super();
+	}
+	
+	
 	
 	
 }

@@ -1,5 +1,6 @@
 package br.com.fiap.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 @Entity
 @Table(name="ESTADO")
-public class Estado {
+public class Estado implements Serializable{
+	/**
+	 * Classe responsável pela tabela ESTADO
+	 * @author filipemoraes
+	 * 
+	 */
+	private static final long serialVersionUID = 5323758222603603808L;
+
 	@Id
 	@Column(name="CODIGO", unique=true, nullable=false)
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -26,6 +34,28 @@ public class Estado {
 	
 	@Column(name="NOME")
 	private String nome;
+	
+	@Override
+	public String toString() {
+		return "Estado [codigo=" + codigo + ", UF=" + UF + ", nome=" + nome + ", empresa=" + empresa.getCodigo() + "]";
+	}
+
+	public Estado(int codigo, String uF, String nome, Empresa empresa, List<Cidade> cidades) {
+		super();
+		this.codigo = codigo;
+		UF = uF;
+		this.nome = nome;
+		this.setEmpresa(empresa);
+		this.cidades = cidades;
+	}
+
+	public Estado() {
+		super();
+	}
+
+	public Empresa getEmpresa() {
+		return empresa;
+	}
 	
 	@ManyToOne(cascade=CascadeType.ALL, targetEntity=Empresa.class)
 	@JoinColumn(name="EMPRESA")
@@ -68,30 +98,6 @@ public class Estado {
 
 	public void setCidades(List<Cidade> cidades) {
 		this.cidades = cidades;
-	}
-	
-	
-
-	@Override
-	public String toString() {
-		return "Estado [codigo=" + codigo + ", UF=" + UF + ", nome=" + nome + ", empresa=" + empresa.getCodigo() + "]";
-	}
-
-	public Estado(int codigo, String uF, String nome, Empresa empresa, List<Cidade> cidades) {
-		super();
-		this.codigo = codigo;
-		UF = uF;
-		this.nome = nome;
-		this.setEmpresa(empresa);
-		this.cidades = cidades;
-	}
-
-	public Estado() {
-		super();
-	}
-
-	public Empresa getEmpresa() {
-		return empresa;
 	}
 
 	public void setEmpresa(Empresa empresa) {

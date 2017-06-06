@@ -50,6 +50,7 @@ public class GenericImpl<T, K> implements GenericRepository<T, K>{
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> findAll() {
 		String name = classe.getSimpleName();

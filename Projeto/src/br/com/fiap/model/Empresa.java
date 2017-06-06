@@ -1,5 +1,6 @@
 package br.com.fiap.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "EMPRESA")
-public class Empresa {
+public class Empresa  implements Serializable{
+
+	/**
+	 * Classe responsável pela tabela EMPRESA
+	 * @author filipemoraes
+	 */
+	private static final long serialVersionUID = -8908065634186117898L;
 
 	@Id
 	@Column(name = "CODIGO", nullable = false, unique = true)
@@ -78,10 +85,11 @@ public class Empresa {
 		super();
 	}
 
+	
 	@Override
 	public String toString() {
 		return "Empresa [codigo=" + codigo + ", nome=" + nome + ", atuacao=" + atuacao + "]";
-	}
+	}	
 
 
 
